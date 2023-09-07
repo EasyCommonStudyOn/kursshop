@@ -1,0 +1,2 @@
+virtualenv venv              создать виртуальное окружение
+source venv/Scripts/activate       активировать окружение
