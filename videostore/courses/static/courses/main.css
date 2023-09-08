@@ -1,0 +1,26 @@
+body {
+    background: #fafafa;
+}
+
+.courses {
+    display: flex;
+    justify-content: space-between; /* */
+    flex-wrap: wrap; /* элементы могут переходить в новые ряды */
+    align-items: center; /* все вертикальные елементы должны находиться по центру */
+    width: 80%;
+    margin: 100px 10%;
+
+}
+
+.courses .course {
+    width: 30%;
+}
+
+.courses .course img {
+    width: 100%;
+}
+
+footer {
+    width: 80%;
+    margin-left: 10%;
+}
