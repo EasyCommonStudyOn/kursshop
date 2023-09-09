@@ -14,7 +14,7 @@
     <img src="/pictures/default.png" alt="{{course.title}}">
     {%endif%}
 
-    <a href="#" class="btn btn-warning mt-3">Посмотреть</a> <!-- страница перезода на детальную инфо-->
+    <a href="{{ course.get_absolute_url }}" class="btn btn-warning mt-3">Посмотреть</a> <!-- страница перезода на детальную инфо-->
 </div>
 {%endfor%}
 </div>

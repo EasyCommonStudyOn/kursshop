@@ -2,7 +2,7 @@ body {
     background: #fafafa;
 }
 
-.courses {
+.courses, .main-block {
     display: flex;
     justify-content: space-between; /* */
     flex-wrap: wrap; /* элементы могут переходить в новые ряды */
@@ -18,6 +18,15 @@ body {
 
 .courses .course img {
     width: 100%;
+}
+
+.main-block {
+    justify-content: flex-start;
+    align-items: flex-start; /*прижаты к верху*/
+}
+
+.one-course {
+    margin-right: 100px;
 }
 
 footer {
