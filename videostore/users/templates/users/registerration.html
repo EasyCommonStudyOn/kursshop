@@ -1,0 +1,18 @@
+{% extends 'courses/main-layout.html' %}
+{%load crispy_forms_tags%}
+{% block title%}
+{{title}}
+{%endblock%}
+
+{%block main_section%}
+<div class="container">
+<h1>{{title}}</h1>
+<form method="post" class="form-register">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button class="btn btn-outline-warning" type="submit">Зарегистрироваться</button>
+    <hr>
+    <p>Уже зарегистрированы? <a href="{%url 'user' %}">Войти в личный кабинет</a></p>
+</form>
+</div>
+{%endblock main_section%}

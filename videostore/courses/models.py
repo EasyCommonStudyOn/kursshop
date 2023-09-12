@@ -9,6 +9,9 @@ class Course(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()  # без ограничения на длину текса для описания курса
     img = models.ImageField(default='default.png', upload_to='course_images')
+    free = models.BooleanField(default=True) #платность курса выставляет галочку
+
+
 
     def __str__(self):  # при выводе обекта этого класа будет выведелено его title
         return self.title

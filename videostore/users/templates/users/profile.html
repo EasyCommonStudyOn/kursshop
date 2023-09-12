@@ -1,0 +1,27 @@
+{% extends 'courses/main-layout.html' %}
+{%load crispy_forms_tags%}
+{% block title%}
+Кабинет пользователя
+{%endblock%}
+
+
+{%block main_section%}
+<div class="container">
+<h1>Кабинет пользователя</h1>
+<div class="media text-muted pt-3">
+    <img class="bd-placeholder-img mr-2 rounded" width="64" height="64" src="{{user.profile.img.url}}">
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">@{{user.username}}</strong>
+        {%if user.email%}
+        <b>Email: {{user.email}}</b>
+        {%endif%}
+    </p>
+</div>
+<form method="post" enctype="multipart/form-data" class="form-register mt-4">
+    {%csrf_token%}
+    {{updateUserForm.as_p}}
+    {{profileForm.as_p}}
+    <button class="btn btn-outline-warning" type="submit">Обновить</button>
+</form>
+</div>
+{%endblock main_section%}

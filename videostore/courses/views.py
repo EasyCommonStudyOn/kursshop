@@ -1,5 +1,8 @@
 from .models import Course, Lesson
 from django.views.generic import ListView, DetailView  # для конкретной запысили на старинцах
+from django.shortcuts import render
+import time
+from cloudipsp import Api, Checkout
 
 
 class HomePage(ListView):
@@ -14,6 +17,20 @@ class HomePage(ListView):
         return ctx
 
 
+def tarrifsPage(request):
+    api = Api(merchant_id=1396424,
+              secret_key='test')
+    checkout = Checkout(api=api)
+    data = {
+        "currency": "EUR",
+        "amount": 1500,
+        "order_desc":"Покупка подписки на сайте",
+        "order_id":str(time.time())
+    }
+    url = checkout.url(data).get('checkout_url')
+    return render(request, 'courses/tarrifs.html', {'title': 'Тарифы на сайте', 'url':url})
+
+
 class CourseDetailPage(DetailView):
     model = Course  # какая таблица используеться
     template_name = 'courses/course-detail.html'  # какой шаблон используеться
@@ -24,9 +41,11 @@ class CourseDetailPage(DetailView):
             slug=self.kwargs[
                 'slug']).first()  # перебрать все обьекты в этой модели с фильтром значения slug как и в url адресе. first - один обьект выбираем
         ctx['lessons'] = Lesson.objects.filter(course=ctx[
-            'title']).order_by('number')  # название курса соответствует полю курс- вибрать все уроки курса название которого соответствуют странице на который мы сейчсас
+            'title']).order_by(
+            'number')  # название курса соответствует полю курс- вибрать все уроки курса название которого соответствуют странице на который мы сейчсас
         # print(ctx['lessons'].query) #отслеживание фильтра в терминале sql запросы
         return ctx
+
 
 class LessonDetailPage(DetailView):
     model = Course

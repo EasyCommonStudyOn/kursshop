@@ -1,0 +1,50 @@
+{% extends 'courses/main-layout.html' %}
+
+{% block main_section %}
+<div class="container mt-5">
+    <h2 class="text-center">{{ title }}</h2>
+    {% if user.is_authenticated == False or user.profile.account_type == "Бесплатный пакет" %}
+    <p class="text-center">У нас на сайте вы можете приобрести полную подписку на сайте</p>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 justify-content-center">
+        <div class="col-md-4">
+            <div class="card mb-4 rounded-3 shadow-sm mx-auto">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Бесплатный</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$0<small
+                            class="text-body-secondary fw-light">/euro</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Бесплатные курсы</li>
+                        <li>Техподдержка</li>
+                        <li>Консультации</li>
+                        <li>Домашние работы</li>
+                    </ul>
+                    <a href="{% url 'reg' %}" class="btn btn-lg btn-outline-primary w-100">Зарегистрироваться</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 rounded-3 shadow-sm mx-auto">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Pro</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$15<small
+                            class="text-body-secondary fw-light">/euro</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Платные курсы</li>
+                        <li>Техподдержка</li>
+                        <li>Консультации</li>
+                        <li>Домашние работы</li>
+                    </ul>
+                    <a href="{{url}}" class="btn btn-lg btn-outline-primary w-100">Купить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>У Вас куплена максимальная подписка</p>
+    {% endif %}
+</div>
+{% endblock %}
