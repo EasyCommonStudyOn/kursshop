@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView  # для конкретн
 from django.shortcuts import render
 import time
 from cloudipsp import Api, Checkout
+import json
 
 
 class HomePage(ListView):
@@ -17,18 +18,25 @@ class HomePage(ListView):
         return ctx
 
 
+def callback_payment(request):  #получить данный отправленные от сервиса FONDY
+    if request.method == "POST":
+        data = json.load(request.POST)
+        print(data)
+
+
 def tarrifsPage(request):
-    api = Api(merchant_id=1396424,
+    api = Api(merchant_id=1396424,  # код с документации FONDY
               secret_key='test')
     checkout = Checkout(api=api)
     data = {
         "currency": "EUR",
         "amount": 1500,
-        "order_desc":"Покупка подписки на сайте",
-        "order_id":str(time.time())
+        "order_desc": "Покупка подписки на сайте",
+        "order_id": str(time.time()),
+        "merchant_data": 'example@easy.de'
     }
     url = checkout.url(data).get('checkout_url')
-    return render(request, 'courses/tarrifs.html', {'title': 'Тарифы на сайте', 'url':url})
+    return render(request, 'courses/tarrifs.html', {'title': 'Тарифы на сайте', 'url': url})
 
 
 class CourseDetailPage(DetailView):
